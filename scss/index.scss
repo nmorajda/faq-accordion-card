@@ -1,0 +1,220 @@
+$breakpoint: 996px;
+$card-mobile-width: 32rem;
+$card-desktop-width: 88rem;
+
+$font-family-primary: 'Kumbh Sans', sans-serif;
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+// colors
+$dark:  hsl(238, 29%, 16%);
+$light: hsl(240, 5%, 91%);
+$grey-light: hsl(240, 5%, 91%);
+$grey-dark: hsl(240, 6%, 50%);
+$red: hsl(14, 88%, 65%);
+$blue: hsl(240, 73%, 65%);
+$violet: hsl(273, 75%, 66%);
+
+$border-color: $grey-light;
+
+// Mobile first
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+*, *:after, *:before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+body {
+    min-height: 100vh;
+    font-family: $font-family-primary;
+    font-size: 1.2rem;
+    color: $dark;
+    background: linear-gradient(to bottom, $violet, $blue)
+
+}
+
+.container {
+    min-height: 100vh;
+    padding: 2.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// global details element styling
+details {
+    border-bottom: 1px solid $border-color;
+    summary {
+        position: relative;
+        margin: 1.6rem 0 1.2rem 0;
+        padding-right: 2.4rem;
+        font-size: 1.3rem;
+        outline: none;
+        cursor: pointer;
+        list-style: none;
+        &::-webkit-details-marker {
+            display: none;
+        }
+
+        &:hover {
+            color: $red;
+        }
+
+        &:after {
+            position: absolute;
+            right: 0;
+            content: url(../images/icon-arrow-down.svg);
+            transition: all .3s;
+
+        }
+    }
+
+    &[open] {
+        summary {
+            
+            font-weight: $font-weight-bold;
+            &:after {
+                transform: rotate(180deg);
+            }
+            
+        }
+    }
+
+    .info {
+        margin-bottom: 1rem;
+        line-height: 1.5;
+        color: $grey-dark;
+    }
+}
+
+.card-wrapper {
+    position: relative;
+    .cube {
+        display: none;
+
+        @media (min-width: $breakpoint) {
+            display: block;
+            position: absolute;
+            z-index: 2;
+            top: 40%;
+            left: -9.2rem;
+            animation: upAndDown 2s infinite;
+        }
+    }
+}
+
+.card {
+    position: relative;
+    width: $card-mobile-width;
+    padding: 2.4rem;
+    padding-bottom: 4rem;
+    border-radius: 2.4rem;
+    background-color: #fff;
+    background-image: url(../images/bg-pattern-mobile.svg);
+    background-position: top center;
+    background-repeat: no-repeat;
+    
+    @media (min-width: $breakpoint) {
+        width: $card-desktop-width;
+        min-height: 51.2rem;
+        overflow: hidden;
+        display: flex;
+        background-image: url(../images/bg-pattern-desktop.svg);
+        background-position: -57.6rem 68%;
+    }
+    
+
+    &__illustration {
+        position: relative;
+        display: block;
+        // mobile image have left transparency padding
+        transform: translate(-13px, -132px);
+        @media (min-width: $breakpoint) {
+            width: 50%;
+            transform: translate(-10rem,6rem);
+        }
+
+        .cube {
+            display: none;
+
+            @media (min-width: $breakpoint) {
+                display: block;
+                position: absolute;
+                left: -1.6rem;
+                top: 12rem;
+                
+            }
+        }
+    }
+
+    &__text {
+        margin-top: -8rem;
+        @media (min-width: $breakpoint) {
+            width: 50%;
+            margin-top: 0;
+            padding: 6rem 0 6rem 4rem;
+
+        }
+
+        .title {
+            margin-bottom: 4rem;
+            font-size: 3.2rem;
+            text-align: center;
+    
+            @media (min-width: $breakpoint) {
+                text-align: left;
+            }
+        }
+    }
+
+    &__faq {
+        @media (min-width: $breakpoint) {
+            padding-right: 4rem;
+            max-height: 25rem;
+            overflow-y: overlay;
+            &::-webkit-scrollbar {
+                width: 5px;
+            }
+            &::-webkit-scrollbar-track {
+                box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: darkgrey;
+                // outline: 1px solid slategrey;
+            }
+        }
+    }
+}
+
+footer {
+    position: absolute;
+    bottom: 2.4rem;
+    width: 100%;;
+    text-align: center;
+
+    a {
+        color: $grey-light ;
+    }
+}
+
+// animations
+@keyframes upAndDown {
+    0% {
+        filter: drop-shadow(0 15px 15px rgba(0, 0, 0, 0.3));
+        transform: translate(0);
+    }
+    50% {
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+        transform: translateY(-1rem);
+    }
+    100% {
+        filter: drop-shadow(0 15px 15px rgba(0, 0, 0, 0.3));
+        transform: translate(0);
+    }
+}
